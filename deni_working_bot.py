@@ -15,7 +15,7 @@ CHOOSING, DRIVER_NAME, CLIENT_NAME, CAR_MODEL, PLATE_NUMBER, ODOMETER, PETROL_LE
 
 async def start(update: Update, context: CallbackContext) -> int:
     keyboard = [
-        [KeyboardButton("Delivery"), KeyboardButton("Pickup")]
+        [KeyboardButton("🚗Delivery"), KeyboardButton("🚙Pickup")]
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True, resize_keyboard=True)
     await update.message.reply_text('Please choose an option:', reply_markup=reply_markup)
@@ -24,7 +24,7 @@ async def start(update: Update, context: CallbackContext) -> int:
 
 async def initial_choice(update: Update, context: CallbackContext) -> int:
     text = update.message.text
-    if text in ["Delivery", "Pickup"]:
+    if text in ["🚗Delivery", "🚙Pickup"]:
         context.user_data['choice'] = text
         if text == "Delivery":
             await update.message.reply_text('😎Please provide the driver\'s name:')
