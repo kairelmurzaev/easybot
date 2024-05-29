@@ -27,9 +27,9 @@ async def initial_choice(update: Update, context: CallbackContext) -> int:
     if text in ["Delivery", "Pickup"]:
         context.user_data['choice'] = text
         if text == "Delivery":
-            await update.message.reply_text('Please provide the driver\'s name:')
+            await update.message.reply_text('😎Please provide the driver\'s name:')
         else:
-            await update.message.reply_text('Please provide your name as the driver:')
+            await update.message.reply_text('🧔🏻‍♂️Please provide your name as the driver:')
         return DRIVER_NAME
     else:
         await update.message.reply_text('Please choose either "Delivery" or "Pickup".')
@@ -39,37 +39,37 @@ async def initial_choice(update: Update, context: CallbackContext) -> int:
 
 async def process_driver_name(update: Update, context: CallbackContext) -> int:
     context.user_data['driver_name'] = update.message.text
-    await update.message.reply_text('Please provide the client\'s name:')
+    await update.message.reply_text('🧔🏻‍♂️Please provide the client\'s name:')
     return CLIENT_NAME
 
 async def process_client_name(update: Update, context: CallbackContext) -> int:
     context.user_data['client_name'] = update.message.text
-    await update.message.reply_text('Please provide the car model:')
+    await update.message.reply_text('🚘Please provide the car model:')
     return CAR_MODEL
 
 async def process_car_model(update: Update, context: CallbackContext) -> int:
     context.user_data['car_model'] = update.message.text
-    await update.message.reply_text('Please provide the plate number:')
+    await update.message.reply_text('🔢Please provide the plate number:')
     return PLATE_NUMBER
 
 async def process_plate_number(update: Update, context: CallbackContext) -> int:
     context.user_data['plate_number'] = update.message.text
-    await update.message.reply_text('Please provide the car odometer:')
+    await update.message.reply_text('🔢Please provide the car odometer:')
     return ODOMETER
 
 async def process_odometer(update: Update, context: CallbackContext) -> int:
     context.user_data['odometer'] = update.message.text
-    await update.message.reply_text('Please provide the petrol level:')
+    await update.message.reply_text('⛽Please provide the petrol level:')
     return PETROL_LEVEL
 
 async def process_petrol_level(update: Update, context: CallbackContext) -> int:
     context.user_data['petrol_level'] = update.message.text
-    await update.message.reply_text('Please provide the money paid:')
+    await update.message.reply_text('💵Please provide the money paid:')
     return MONEY_PAID
 
 async def process_money_paid(update: Update, context: CallbackContext) -> int:
     context.user_data['money_paid'] = update.message.text
-    await update.message.reply_text('Please provide the delivery address:')
+    await update.message.reply_text('🗺️Please provide the delivery address:')
     return DELIVERY_ADDRESS
 
 async def process_delivery_address(update: Update, context: CallbackContext) -> int:
@@ -79,7 +79,7 @@ async def process_delivery_address(update: Update, context: CallbackContext) -> 
 
 async def process_problems(update: Update, context: CallbackContext) -> int:
     context.user_data['problems'] = update.message.text
-    await update.message.reply_text('Please take a picture of the car:')
+    await update.message.reply_text('🚒Please take a picture of the car:')
     return PICTURE
 
 
@@ -130,15 +130,15 @@ async def done(update: Update, context: CallbackContext) -> int:
             current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             form_data = [
                 f"Date and Time: {current_time}",
-                f"Driver's Name: {context.user_data['driver_name']}",
-                f"Client's Name: {context.user_data['client_name']}",
-                f"Car Model: {context.user_data['car_model']}",
-                f"Plate Number: {context.user_data['plate_number']}",
-                f"Odometer: {context.user_data['odometer']}",
-                f"Petrol Level: {context.user_data['petrol_level']}",
-                f"Money Paid: {context.user_data['money_paid']}",
-                f"Delivery Address: {context.user_data['delivery_address']}",
-                f"Problems: {context.user_data['problems']}"
+                f"😎Driver's Name: {context.user_data['driver_name']}",
+                f"🧔🏻‍♂️Client's Name: {context.user_data['client_name']}",
+                f"🚘Car Model: {context.user_data['car_model']}",
+                f"🔢Plate Number: {context.user_data['plate_number']}",
+                f"🔢Odometer: {context.user_data['odometer']}",
+                f"⛽Petrol Level: {context.user_data['petrol_level']}",
+                f"💵Money Paid: {context.user_data['money_paid']}",
+                f"🗺️Delivery Address: {context.user_data['delivery_address']}",
+                f"🚒Problems: {context.user_data['problems']}"
             ]
 
             
