@@ -193,7 +193,6 @@ def main():
     
     application = Application.builder().token(TOKEN).build()
 
-    
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
@@ -212,16 +211,13 @@ def main():
         fallbacks=[CommandHandler('cancel', cancel), MessageHandler(DoneFilter(), done)],
     )
     application.add_handler(conv_handler)
-
-    # Start 
-@app.route('/')
-async def home():
-    return "Bot is running"
+    return application
 
 async def start_bot():
-    bot_app = await main()
+    bot_app = main()
     await bot_app.run_polling()
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+
 if __name__ == '__main__':
     asyncio.run(start_bot())
 
