@@ -5,7 +5,7 @@ import aiohttp
 from io import BytesIO
 from datetime import datetime
 from flask import Flask
-import threading
+
 import os
 
 app = Flask(__name__)
