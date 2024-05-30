@@ -191,6 +191,8 @@ def main():
     TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
 
     
+def main() -> Application:
+    TOKEN = "YOUR_TELEGRAM_BOT_TOKEN_HERE"
     application = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(
@@ -212,7 +214,7 @@ def main():
     )
     application.add_handler(conv_handler)
     return application
-
+    
 async def start_bot():
     bot_app = main()
     await bot_app.run_polling()
@@ -220,5 +222,4 @@ async def start_bot():
 
 if __name__ == '__main__':
     asyncio.run(start_bot())
-
 
