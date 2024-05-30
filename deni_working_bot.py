@@ -4,7 +4,11 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Conv
 import aiohttp
 from io import BytesIO
 from datetime import datetime
+from flask import Flask
+import threading
+import os
 
+app = Flask(__name__)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -211,6 +215,16 @@ def main():
     # Start 
     application.run_polling()
 
+@app.route('/')
+def home():
+    return "Bot is running"
+
 if __name__ == '__main__':
-    main()
+    # Start the bot in a separate thread
+    bot_thread = threading.Thread(target=start_bot)
+    bot_thread.start()
+
+    # Run the Flask app
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
