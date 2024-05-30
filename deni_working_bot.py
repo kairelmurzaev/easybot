@@ -219,7 +219,7 @@ async def home():
     return "Bot is running"
 
 async def main():
-    bot_app = await main()
+    bot_app = await start_bot()
     await bot_app.run_polling()
 
 if __name__ == '__main__':
