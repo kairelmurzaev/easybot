@@ -5,7 +5,7 @@ import aiohttp
 from io import BytesIO
 from datetime import datetime
 from flask import Flask
-
+import threading
 import os
 
 app = Flask(__name__)
@@ -221,7 +221,7 @@ def home():
 
 if __name__ == '__main__':
     # Start the bot in a separate thread
-    bot_thread = target=main
+    bot_thread = threading.Thread(target=main)
     bot_thread.start()
 
     # Run the Flask app
