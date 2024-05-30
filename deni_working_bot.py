@@ -186,7 +186,7 @@ class DoneFilter(filters.UpdateFilter):
                 update.message.text == "Done")
 
 
-def main():
+def start_bot():
     
     TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
 
@@ -218,7 +218,7 @@ def main():
 async def home():
     return "Bot is running"
 
-async def main():
+async def start_bot():
     bot_app = await main()
     await bot_app.run_polling()
 
