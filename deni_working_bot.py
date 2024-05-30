@@ -221,7 +221,7 @@ async def home():
 async def start_bot():
     bot_app = await main()
     await bot_app.run_polling()
-
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 if __name__ == '__main__':
     asyncio.run(start_bot())
 
