@@ -1,5 +1,5 @@
 python-telegram-bot==20.4
 aiohttp==3.7.4
 aiodns==3.0.0
-flask==2.0.2
+quart==0.15.1
 werkzeug==2.0.2
