@@ -4,11 +4,12 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Conv
 import aiohttp
 from io import BytesIO
 from datetime import datetime
-from flask import Flask
+from quart import Quart
 import threading
 import os
+import asyncio
 
-app = Flask(__name__)
+app = Quart(__name__)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -213,17 +214,17 @@ def main():
     application.add_handler(conv_handler)
 
     # Start 
-    application.run_polling()
-    application.run_polling()
 @app.route('/')
-def home():
+async def home():
     return "Bot is running"
 
-if __name__ == '__main__':
-    # Start the bot in a separate thread
-    bot_thread = threading.Thread(target=main)
-    bot_thread.start()
+async def main():
+    bot_app = main()
+    await bot_app.initialize()
+    await bot_app.start()
+    await app.run_task(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    await bot_app.stop()
 
-    # Run the Flask app
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+if __name__ == '__main__':
+    asyncio.run(main())
+
