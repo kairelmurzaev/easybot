@@ -214,14 +214,14 @@ def main():
 
     # Start 
     application.run_polling()
-
+    application.run_polling()
 @app.route('/')
 def home():
     return "Bot is running"
 
 if __name__ == '__main__':
     # Start the bot in a separate thread
-    bot_thread = threading.Thread(target=start_bot)
+    bot_thread = threading.Thread(target=main)
     bot_thread.start()
 
     # Run the Flask app
