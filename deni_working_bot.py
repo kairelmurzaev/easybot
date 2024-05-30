@@ -186,7 +186,7 @@ class DoneFilter(filters.UpdateFilter):
                 update.message.text == "Done")
 
 
-def start_bot():
+def main():
     
     TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
 
