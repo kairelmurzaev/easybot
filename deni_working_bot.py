@@ -221,7 +221,7 @@ def home():
 
 if __name__ == '__main__':
     # Start the bot in a separate thread
-    bot_thread = threading.Thread(target=main)
+    bot_thread = target=main
     bot_thread.start()
 
     # Run the Flask app
