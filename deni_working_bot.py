@@ -186,13 +186,8 @@ class DoneFilter(filters.UpdateFilter):
                 update.message.text == "Done")
 
 
-def main():
-    
-    TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
-
-    
 def main() -> Application:
-    TOKEN = "YOUR_TELEGRAM_BOT_TOKEN_HERE"
+    TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
     application = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(
@@ -215,11 +210,19 @@ def main() -> Application:
     application.add_handler(conv_handler)
     return application
     
+@app.route('/')
+async def home():
+    return "Bot is running"
+
 async def start_bot():
     bot_app = main()
-    await bot_app.run_polling()
+    await bot_app.initialize()
+    await bot_app.start()
+    await bot_app.updater.start_polling()
+    
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    loop.create_task(start_bot())
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 
-if __name__ == '__main__':
-    asyncio.run(start_bot())
 
