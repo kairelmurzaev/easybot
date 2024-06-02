@@ -186,8 +186,3 @@ async def start_bot():
     await bot_app.start()
     await bot_app.updater.start_polling()
     
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(start_bot())
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
-
