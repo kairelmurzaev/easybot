@@ -5,7 +5,6 @@ import aiohttp
 from io import BytesIO
 from datetime import datetime
 from quart import Quart
-import os
 import asyncio
 
 app = Quart(__name__)
@@ -155,7 +154,7 @@ class DoneFilter(filters.UpdateFilter):
         return isinstance(update, Update) and update.message.text == "Done"
 
 def main() -> Application:
-    TOKEN = os.getenv("6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA")
+    TOKEN = "6409703832:AAGrscCW0q8O5c44LHG_Rg-S70JzDnaijWA"
     application = Application.builder().token(TOKEN).build()
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
@@ -186,8 +185,9 @@ async def start_bot():
     await bot_app.initialize()
     await bot_app.start()
     await bot_app.updater.start_polling()
-
+    
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(start_bot())
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+
