@@ -1,16 +1,11 @@
-import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, ConversationHandler, MessageHandler, CallbackContext, filters
 import aiohttp
 from io import BytesIO
 from datetime import datetime
 from quart import Quart
-import asyncio
-import os
-app = Quart(__name__)
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logger = logging.getLogger(__name__)
+app = Quart(__name__)
 
 CHOOSING, DRIVER_NAME, CLIENT_NAME, CAR_MODEL, PLATE_NUMBER, ODOMETER, PETROL_LEVEL, MONEY_PAID, DELIVERY_ADDRESS, PROBLEMS, PICTURE = range(11)
 
@@ -138,6 +133,7 @@ async def done(update: Update, context: CallbackContext) -> int:
             context.user_data.clear()
             return ConversationHandler.END
         else:
+            await update.message.reply_text
             await update.message.reply_text('Please complete all required fields.')
             return CHOOSING
     else:
@@ -185,4 +181,3 @@ async def start_bot():
     await bot_app.initialize()
     await bot_app.start()
     await bot_app.updater.start_polling()
-    
