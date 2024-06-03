@@ -15,7 +15,7 @@ CHOOSING, DRIVER_NAME, CLIENT_NAME, CAR_MODEL, PLATE_NUMBER, ODOMETER, PETROL_LE
 # Define a function to handle the /start command
 async def start(update: Update, context: CallbackContext) -> int:
     keyboard = [
-        [KeyboardButton("Delivery"), KeyboardButton("Pickup")]
+        [KeyboardButton("🚗Delivery"), KeyboardButton("🚙Pickup")]
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True, resize_keyboard=True)
     await update.message.reply_text('Please choose an option:', reply_markup=reply_markup)
@@ -24,7 +24,7 @@ async def start(update: Update, context: CallbackContext) -> int:
 # Define a function to handle initial button clicks
 async def initial_choice(update: Update, context: CallbackContext) -> int:
     text = update.message.text
-    if text in ["Delivery", "Pickup"]:
+    if text in ["🚗Delivery", "🚙Pickup"]:
         context.user_data['choice'] = text
         await update.message.reply_text('Please provide the driver\'s name:')
         return DRIVER_NAME
@@ -126,15 +126,15 @@ async def done(update: Update, context: CallbackContext) -> int:
             current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             form_data = [
                 f"Date and Time: {current_time}",
-                f"Driver's Name: {context.user_data['driver_name']}",
-                f"Client's Name: {context.user_data['client_name']}",
-                f"Car Model: {context.user_data['car_model']}",
-                f"Plate Number: {context.user_data['plate_number']}",
-                f"Odometer: {context.user_data['odometer']}",
-                f"Petrol Level: {context.user_data['petrol_level']}",
-                f"Money Paid: {context.user_data['money_paid']}",
-                f"Delivery Address: {context.user_data['delivery_address']}",
-                f"Problems: {context.user_data['problems']}"
+                f"😎Driver's Name: {context.user_data['driver_name']}",
+                f"🧔🏻‍♂️Client's Name: {context.user_data['client_name']}",
+                f"🚘Car Model: {context.user_data['car_model']}",
+                f"🔢Plate Number: {context.user_data['plate_number']}",
+                f"🔢Odometer: {context.user_data['odometer']}",
+                f"⛽Petrol Level: {context.user_data['petrol_level']}",
+                f"💵Money Paid: {context.user_data['money_paid']}",
+                f"🗺️Delivery Address: {context.user_data['delivery_address']}",
+                f"🚒Problems: {context.user_data['problems']}"
             ]
 
             # Concatenate all the answers into one message
