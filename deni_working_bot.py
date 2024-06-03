@@ -183,7 +183,7 @@ async def handle_health_check(request):
 
 def main():
     # Your bot token
-    TOKEN = os.getenv("TOKEN")
+    TOKEN = "6409703832:AAHzR8_Ej7J9SaFhIhQ4lABeLGj7LKzVFmg"
 
     # Create the Application
     application = Application.builder().token(TOKEN).build()
