@@ -2,10 +2,8 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, CallbackContext, filters
 import aiohttp
-from aiohttp import web
 from io import BytesIO
 from datetime import datetime
-import os
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -116,7 +114,7 @@ async def picture_response(update: Update, context: CallbackContext) -> int:
 # Define a function to end the photo collection and send the data
 async def done(update: Update, context: CallbackContext) -> int:
     logger.info("Done function called")
-
+   
     text = update.message.text
     logger.info(f"Received message text: {text}")
     if text == "Done":
@@ -147,7 +145,8 @@ async def done(update: Update, context: CallbackContext) -> int:
             if context.user_data['choice'] == 'Delivery':
                 group_chat_id = '-1002057568399'  # Replace with the correct group chat ID for delivery
             else:  # Pickup
-                group_chat_id = '-1002184262143'  # Replace with the correct group chat ID for pickup
+                group_chat_id = '-1002184262143'
+                            # Replace with the correct group chat ID for pickup
             await context.bot.send_message(chat_id=group_chat_id, text=form_message)
 
             # Send all photos separately
@@ -164,7 +163,7 @@ async def done(update: Update, context: CallbackContext) -> int:
     else:
         logger.info("Message text is not 'Done'")
         return ConversationHandler.END
-
+    
 async def cancel(update: Update, context: CallbackContext) -> int:
     """Cancels and ends the conversation."""
     update.message.reply_text('Conversation canceled. /start again to begin.')
@@ -172,23 +171,21 @@ async def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 # Replace the DoneFilter class definition with this
+# Replace the DoneFilter class definition with this
 class DoneFilter(filters.UpdateFilter):
     def filter(self, update: Update) -> bool:
         return (isinstance(update, Update) and
                 update.message.text == "Done")
 
-# Function to handle health checks
-async def handle_health_check(request):
-    return web.Response(text="Bot is running")
 
 def main():
-    # Your bot token
+    # Your bot token obtained from BotFather
     TOKEN = "6409703832:AAHzR8_Ej7J9SaFhIhQ4lABeLGj7LKzVFmg"
 
     # Create the Application
     application = Application.builder().token(TOKEN).build()
 
-    # Add conversation handler with the states CHOOSING, DRIVER_NAME, CLIENT_NAME, CAR_MODEL, PLATE_NUMBER, ODOMETER, PETROL_LEVEL, MONEY_PAID, DELIVERY_ADDRESS, PROBLEMS, PICTURE
+    # Define ConversationHandler to handle user responses
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
@@ -208,16 +205,9 @@ def main():
     )
     application.add_handler(conv_handler)
 
-    # Add health check endpoint
-    app = web.Application()
-    app.add_routes([web.get('/health', handle_health_check)])
-
-    # Start the web server for health checks
-    port = int(os.environ.get("PORT", 8000))
-    web.run_app(app, port=port)
-
-    # Run the bot until you press Ctrl-C
+    # Start the Bot
     application.run_polling()
 
 if __name__ == '__main__':
     main()
+
